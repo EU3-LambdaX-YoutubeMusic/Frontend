@@ -1,9 +1,12 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import RegisterForm from './Components/SignUp';
 
 function App() {
   return (
-    <RegisterForm />
+    <>
+    <Route path="/signup" component={RegisterForm} />
+    </>
   );
 }
 
