@@ -1,8 +1,18 @@
 import React from 'react';
-import { Form, Formik } from 'formik';
+import axios from 'axios';
+import { Formik } from 'formik';
 import { StyledFormField, StyledInput, StyledLabel, StyledSignupContainer, StyledButton } from '../Styles/StyledForm';
+import { validationSchema } from '../Helpers/ValidationSchema';
 
 import SignupImage from '../Assets/earphone.png';
+
+const initialSignupForm = {
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: ""
+};
+
 
 export default function RegisterForm () {
     return (
@@ -15,14 +25,40 @@ export default function RegisterForm () {
         <p>Got an Account? Sign In</p>
         </div>
         <div className="right">
-        <Formik>
-            <StyledFormField>
+        <Formik
+            validationSchema = {validationSchema}
+            initialValues = {initialSignupForm}
+            onSubmit={(values, actions) => {
+                const newUser = {
+                    firstname: values.firstname,
+                    lastname: values.lastname,
+                    email: values.email,
+                    password: values.password
+                };
+
+                axios()
+                .post("/signup", newUser)
+                .then(() => {
+                    actions.setSubmitting(false);
+                })
+                .catch(err => {
+                    actions.setSubmitting(false);
+                });
+            }}
+            >
+            {({
+                values,
+                isSubmitting,
+                handleSubmit
+            }) => (
+            <StyledFormField onSubmit={handleSubmit}>
               <StyledLabel>First Name</StyledLabel> 
               <div data-testid="firstnameField" className="inputField"> 
               <StyledInput
               name="First Name"
               type="text"
               placeholder="John"
+              value={values.firstName}
               />
               </div>
               <StyledLabel>Last Name</StyledLabel>
@@ -31,6 +67,7 @@ export default function RegisterForm () {
               name="Last Name"
               type="text"
               placeholder="Doe"
+              value={values.lastName}
               />
               </div>
               <StyledLabel>Email</StyledLabel>
@@ -39,6 +76,7 @@ export default function RegisterForm () {
               name="Email"
               type="email"
               placeholder="johndoe@example.com"
+              value={values.email}
               />
               </div>
               <StyledLabel>Password</StyledLabel> 
@@ -47,12 +85,14 @@ export default function RegisterForm () {
               name="password"
               type="password"
               placeholder="Enter your password"
+              value={values.password}
               />
               </div>
-              <StyledButton type="submit">
+              <StyledButton type="submit" disabled={isSubmitting}>
                 Sign up
             </StyledButton>
             </StyledFormField>
+            )}
         </Formik>
         </div>
         </StyledSignupContainer>
