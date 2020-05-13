@@ -15,8 +15,12 @@ export const StyledSignupContainer = styled.section`
         width: 45%; 
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             padding: 0 2rem 2rem 0;
+        }
+
+        h2 {
+            font-size: 1.2rem;
         }
 
         img {
