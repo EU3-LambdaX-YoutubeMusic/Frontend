@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { StyledFormField, StyledInput, StyledLabel, StyledSignupContainer, StyledButton } from '../Styles/StyledForm';
+import { StyledForm, StyledInput, StyledLabel, StyledSignupContainer, StyledButton } from '../Styles/StyledForm';
 
 import SignupImage from '../Assets/earphone.png';
 
@@ -18,7 +18,7 @@ export default function LoginForm (props) {
         </div>
         <div className="right">
         <Formik>
-            <StyledFormField>
+            <StyledForm>
               <StyledLabel>Email</StyledLabel>
               <div data-testid="emailField" className="inputField">  
               <StyledInput
@@ -41,7 +41,7 @@ export default function LoginForm (props) {
                 Sign In
             </StyledButton>
             </p>
-            </StyledFormField>
+            </StyledForm>
         </Formik>
         </div>
         </StyledSignupContainer>

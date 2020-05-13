@@ -10,4 +10,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+
+}
+
+.AuthBox {
+  background-color: #ffffff;
+  border: 1px solid #0066f526;
+  border-radius: 5px;
+  padding: 40px;
 }

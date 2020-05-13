@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Formik } from 'formik';
-import { StyledFormField, StyledInput, StyledLabel, StyledSignupContainer, StyledButton } from '../Styles/StyledForm';
+import { StyledForm, StyledFormField, StyledInput, StyledLabel, StyledSignupContainer, StyledButton } from '../Styles/StyledForm';
 import { validationSchema } from '../Helpers/ValidationSchema';
 
 import SignupImage from '../Assets/earphone.png';
@@ -17,13 +17,14 @@ const initialSignupForm = {
 export default function RegisterForm () {
     return (
         <StyledSignupContainer>
-        <div className="left">
+        {/* <div className="left">
         <h1>Create an Account</h1>
         <div className="img-cont">
           <img src={SignupImage} alt="Earphones" />
         </div>
         <p>Got an Account? Sign In</p>
-        </div>
+        </div> */}
+        
         <div className="right">
         <Formik
             validationSchema = {validationSchema}
@@ -51,47 +52,49 @@ export default function RegisterForm () {
                 isSubmitting,
                 handleSubmit
             }) => (
-            <StyledFormField onSubmit={handleSubmit}>
+            <div className="AuthBox">
+            <StyledForm onSubmit={handleSubmit}>
+            <StyledFormField>
               <StyledLabel>First Name</StyledLabel> 
-              <div data-testid="firstnameField" className="inputField"> 
               <StyledInput
               name="First Name"
               type="text"
               placeholder="John"
               value={values.firstName}
               />
-              </div>
+            </StyledFormField>
+            <StyledFormField> 
               <StyledLabel>Last Name</StyledLabel>
-              <div data-testid="lastnameField" className="inputField">  
               <StyledInput
               name="Last Name"
               type="text"
               placeholder="Doe"
               value={values.lastName}
               />
-              </div>
-              <StyledLabel>Email</StyledLabel>
-              <div data-testid="emailField" className="inputField">  
+              </StyledFormField>
+              <StyledFormField>
+              <StyledLabel>Email</StyledLabel> 
               <StyledInput
               name="Email"
               type="email"
               placeholder="johndoe@example.com"
               value={values.email}
               />
-              </div>
-              <StyledLabel>Password</StyledLabel> 
-              <div data-testid="passwordField" className="inputField"> 
+              </StyledFormField>
+              <StyledFormField>
+              <StyledLabel>Password</StyledLabel>  
               <StyledInput
               name="password"
               type="password"
               placeholder="Enter your password"
               value={values.password}
               />
-              </div>
+              </StyledFormField>
               <StyledButton type="submit" disabled={isSubmitting}>
                 Sign up
             </StyledButton>
-            </StyledFormField>
+            </StyledForm>
+            </div>
             )}
         </Formik>
         </div>

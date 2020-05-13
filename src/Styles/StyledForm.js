@@ -5,8 +5,7 @@ export const StyledSignupContainer = styled.section`
     max-width: 100%;
     display: flex;
     flex-direction: row;
-    margin-top: 5rem;
-    padding: 1rem;
+    padding: 80px 60px 0 60px;
     background-color: #CCDFCB;
 
     .left {
@@ -16,7 +15,7 @@ export const StyledSignupContainer = styled.section`
 
         h1 {
             font-size: 1.8rem;
-            padding: 0 2rem 2rem 0;
+            padding: 0 50px 50px 0;
         }
 
         h2 {
@@ -38,12 +37,12 @@ export const StyledSignupContainer = styled.section`
     .right {
         display: flex;
         flex-direction: column;
-        width: 45%;
+        width: 100%;
         margin-top: 80px;
     }
 `;
 
-export const StyledFormField = styled(Form)`
+export const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,6 +54,12 @@ export const StyledFormField = styled(Form)`
         width:80%;
     }
 
+`;
+
+export const StyledFormField = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 `;
 
 export const StyledInput = styled.input`
