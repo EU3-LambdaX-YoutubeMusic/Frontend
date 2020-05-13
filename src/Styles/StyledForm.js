@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Form } from "formik";
 import { theme } from "../Theme/theme";
+import { Link } from "react-router-dom";
 
 export const StyledSignupContainer = styled.section`
   max-width: 100%;
@@ -17,17 +18,19 @@ export const StyledSignupContainer = styled.section`
 
     .img-cont {
       padding-right: 20px;
-      /* height: 100%; */
     }
 
     h1 {
       margin-top: 0px;
-      font-size: 1.8rem;
-      /* padding: 0 50px 50px 0; */
+      font-size: 1.4rem;
+      color: ${theme.headings};
+      font-family: ${theme.mainFont};
     }
 
     h2 {
-      font-size: 1.2rem;
+      font-size: 1rem;
+      color: ${theme.text};
+      font-family: ${theme.mainFont};
     }
 
     img {
@@ -39,6 +42,7 @@ export const StyledSignupContainer = styled.section`
       font-size: 1.2rem;
       padding: 1rem;
       margin-bottom: 5px;
+      font-family: ${theme.mainFont};
     }
   }
 
@@ -61,6 +65,10 @@ export const StyledForm = styled(Form)`
     flex-direction: column;
     width: 80%;
   }
+
+  .SignLink {
+    font-family: ${theme.mainFont};  
+  }
 `;
 
 export const StyledFormField = styled.div`
@@ -79,6 +87,7 @@ export const StyledFormField = styled.div`
     content: "*";
     color: red;
   }
+  
 `;
 
 export const StyledInput = styled.input`
@@ -98,6 +107,8 @@ export const StyledInput = styled.input`
 export const StyledLabel = styled.label`
   font-size: 1.5rem;
   padding: 10px;
+  font-family: ${theme.mainFont};
+  color: ${theme.text};
 `;
 
 export const StyledButton = styled.button`
@@ -108,4 +119,9 @@ export const StyledButton = styled.button`
   color: #ffffff;
   line-height: 1.4;
   background-color: ${theme.button};
+`;
+
+export const StyledLink = styled(Link)`
+    font-family: ${theme.mainFont};
+    color: ${theme.link};
 `;

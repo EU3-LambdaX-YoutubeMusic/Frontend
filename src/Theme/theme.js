@@ -6,5 +6,6 @@ export const theme = {
 
   mainFont: "roboto",
 
-  button: "#154951"
+  button: "#154951",
+  link: "#cc338b"
 };

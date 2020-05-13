@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import {
   StyledForm,
@@ -6,7 +7,8 @@ import {
   StyledInput,
   StyledLabel,
   StyledSignupContainer,
-  StyledButton
+  StyledButton,
+  StyledLink
 } from "../Styles/StyledForm";
 import { validationSchema } from "../Helpers/ValidationSchema";
 import { submitHandler } from "../Helpers/Handlers";
@@ -75,7 +77,9 @@ export default function RegisterForm() {
                     value={values.password}
                   />
                 </StyledFormField>
-                <p>Got an Account? Sign In</p>
+                <div className="SignLink">
+                <p>Got an Account? <StyledLink to="/login">Sign In</StyledLink></p>
+                </div>
                 <StyledButton type="submit" disabled={isSubmitting}>
                   Sign up
                 </StyledButton>

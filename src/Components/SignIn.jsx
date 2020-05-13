@@ -1,8 +1,14 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { StyledForm, StyledInput, StyledLabel, StyledSignupContainer, StyledButton } from '../Styles/StyledForm';
+import { StyledForm,
+    StyledInput,
+    StyledLabel,
+    StyledSignupContainer,
+    StyledButton,
+    StyledLink 
+} from '../Styles/StyledForm';
 
-import SignupImage from '../Assets/earphone.png';
+import SignupImage from '../Assets/hero.png';
 
 
 
@@ -17,7 +23,10 @@ export default function LoginForm (props) {
         </div>
         </div>
         <div className="right">
+        <div className="rightR">
+        <div className="LoginForm">
         <Formik>
+        <div className="AuthBox">
             <StyledForm>
               <StyledLabel>Email</StyledLabel>
               <div data-testid="emailField" className="inputField">  
@@ -35,14 +44,17 @@ export default function LoginForm (props) {
               placeholder="Enter your password"
               />
               </div>
-              <p>
-                  New User? Create Account 
+              <div className="CreateAccnt">
+                  New User?  <StyledLink to="/signup">Create Account</StyledLink> 
+                </div> 
               <StyledButton type="submit">
                 Sign In
             </StyledButton>
-            </p>
             </StyledForm>
+            </div>
         </Formik>
+        </div>
+        </div>
         </div>
         </StyledSignupContainer>
     )
