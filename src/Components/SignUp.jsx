@@ -1,6 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import axios from "axios";
 import { Formik } from "formik";
+import Error from "../Helpers/Error";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   StyledForm,
   StyledFormField,
@@ -11,19 +15,56 @@ import {
   StyledLink
 } from "../Styles/StyledForm";
 import { validationSchema } from "../Helpers/ValidationSchema";
-import { submitHandler } from "../Helpers/Handlers";
+
 
 import SignupImage from "../Assets/hero.png";
 
 const initialSignupForm = {
-  firstname: "",
-  lastname: "",
-  email: "",
-  password: ""
-};
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  };
 
-export default function RegisterForm() {
+export function RegisterForm(props) {
+    let history = useHistory()
   return (
+      <Formik
+      validationSchema={validationSchema}
+      initialValues={initialSignupForm}
+      onSubmit={(values, actions) => {
+        const newUser = {
+          firstname: values.firstName,
+          lastname: values.lastName,
+          email: values.email,
+          password: values.password,
+        };
+        
+        actions.setSubmitting(true);
+
+            axios
+            .post("https://lambda-youtube-music.herokuapp.com/api/v1/users/register", newUser)
+            .then((res) => {
+                console.log(res);
+                actions.resetForm();
+                actions.setSubmitting(false);
+                history.push("/playlist")
+            })
+            .catch(err => {
+                toast.error(err.response.statusText);
+                actions.setSubmitting(false);
+            });
+        }}
+    >
+        {({
+                values,
+                errors,
+                touched,
+                handleBlur,
+                handleChange,
+                handleSubmit,
+                isSubmitting
+            }) => (
     <StyledSignupContainer>
       <div className="left">
         <h1>Create an Account</h1>
@@ -31,63 +72,104 @@ export default function RegisterForm() {
           <img src={SignupImage} alt="Earphones" />
         </div>
       </div>
-
       <div className="right">
-        <Formik
-          validationSchema={validationSchema}
-          initialValues={initialSignupForm}
-          // onSubmit={submitHandler}
-        >
-          {({ values, isSubmitting, handleSubmit }) => (
             <div className="AuthBox">
               <StyledForm onSubmit={handleSubmit}>
                 <StyledFormField>
-                  <label>First Name</label>
+                  <StyledLabel>First Name</StyledLabel>
+                  <div data-testid="firstNameField" className="inputField">
                   <StyledInput
-                    name="First Name"
+                    name="firstName"
                     type="text"
                     placeholder="John"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     value={values.firstName}
+                    className={
+                        touched.firstName && errors.firstName ? "has-error" : null
+                      } 
                   />
+                  <Error touched={touched.firstName} message={errors.firstName} />
+                  </div>
                 </StyledFormField>
                 <StyledFormField>
                   <StyledLabel>Last Name</StyledLabel>
+                  <div data-testid="lastNameField" className="inputField">
                   <StyledInput
-                    name="Last Name"
+                    name="lastName"
                     type="text"
                     placeholder="Doe"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     value={values.lastName}
+                    className={
+                        touched.lastName && errors.lastName ? "has-error" : null
+                    }
                   />
+                  <Error touched={touched.lastName} message={errors.lastName} />
+                  </div>
                 </StyledFormField>
                 <StyledFormField>
                   <StyledLabel>Email</StyledLabel>
+                  <div data-testid="emailField" className="inputField">
                   <StyledInput
-                    name="Email"
+                    name="email"
                     type="email"
                     placeholder="johndoe@example.com"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     value={values.email}
+                    className={touched.email && errors.email ? "has-error" : null}
                   />
+                  <Error touched={touched.email} message={errors.email} />
+                  </div>
                 </StyledFormField>
                 <StyledFormField>
                   <StyledLabel>Password</StyledLabel>
+                  <div data-testid="passwordField" className="inputField">
                   <StyledInput
                     name="password"
                     type="password"
                     placeholder="Enter your password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     value={values.password}
+                    className={
+                        touched.password && errors.password ? "has-error" : null
+                      }
                   />
+                  <Error touched={touched.password} message={errors.password} />
+                  </div>
                 </StyledFormField>
                 <div className="SignLink">
                 <p>Got an Account? <StyledLink to="/login">Sign In</StyledLink></p>
                 </div>
-                <StyledButton type="submit" disabled={isSubmitting}>
+                <StyledButton className="abutton" type="submit" disabled={isSubmitting} data-testid="submitButton">
                   Sign up
                 </StyledButton>
+                <ToastContainer
+                    position="top-center"
+                    autoclose={2000}
+                    hideProgressBar
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover
+                    closeButton={false}
+                    style={{
+                    "font-size": "1.5rem",
+                    width: "400px",
+                    "text-align": "center"
+                    }}
+                />
               </StyledForm>
             </div>
-          )}
-        </Formik>
       </div>
     </StyledSignupContainer>
+    )}
+</Formik>
   );
 }
+
+export default RegisterForm;
+
+
