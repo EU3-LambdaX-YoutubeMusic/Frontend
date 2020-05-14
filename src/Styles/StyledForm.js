@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Form } from "formik";
 import { theme } from "../Theme/theme";
 import { Link } from "react-router-dom";
 
@@ -54,7 +53,7 @@ export const StyledSignupContainer = styled.section`
   }
 `;
 
-export const StyledForm = styled(Form)`
+export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;

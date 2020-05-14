@@ -1,5 +1,6 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { login } from '../services/UsersAuth';
+import Spinner from './Spinner';
 import { StyledForm,
     StyledInput,
     StyledLabel,
@@ -11,8 +12,73 @@ import { StyledForm,
 import SignupImage from '../Assets/hero.png';
 
 
-
-export default function LoginForm (props) {
+class Login extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        email: '',
+        password: '',
+        loading: false,
+        error: false,
+      };
+    }
+  
+    handleChange = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value,
+      })
+    }
+  
+    handleSubmit = (e) => {
+      e.preventDefault();
+      this.setState({
+        loading: true
+      })
+  
+      const user = {
+        email: this.state.email,
+        password: this.state.password
+      }
+  
+      login(user)
+        .then(() => {
+          this.setState({
+            loading: false
+          })
+        })
+        .then(() => {
+          this.props.setLoggedIn(true);
+          this.props.history.push('/playlist');
+        })
+        .catch(() => {
+          this.setState({
+            email: '',
+            password: '',
+            loading: false,
+            error: true,
+          });
+          console.log('boo!')
+        })
+  
+    }
+  
+  
+    render() {
+  
+      let error;
+      if (this.state.error) {
+        error = "Invalid Login Details"
+      } else {
+        error = null;
+      }
+  
+      if (this.state.loading) {
+        return (
+            <div>
+                  <Spinner />
+            </div>
+          )
+      } else {
     return (
         <StyledSignupContainer>
         <div className="left">
@@ -25,37 +91,41 @@ export default function LoginForm (props) {
         <div className="right">
         <div className="rightR">
         <div className="LoginForm">
-        <Formik>
         <div className="AuthBox">
-            <StyledForm>
+            <StyledForm >
               <StyledLabel>Email</StyledLabel>
-              <div data-testid="emailField" className="inputField">  
-              <StyledInput
-              name="Email"
-              type="email"
-              placeholder="johndoe@example.com"
-              />
-              </div>
+                  <StyledInput
+                    name="email"
+                    type="email"
+                    placeholder="johndoe@example.com"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                  />
               <StyledLabel>Password</StyledLabel> 
-              <div data-testid="passwordField" className="inputField"> 
-              <StyledInput
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              />
-              </div>
+                  <StyledInput
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
               <div className="CreateAccnt">
                   New User?  <StyledLink to="/signup">Create Account</StyledLink> 
                 </div> 
-              <StyledButton type="submit">
+              <StyledButton className="button" type="button" onClick={this.handleSubmit}>
                 Sign In
             </StyledButton>
+            <h6 style={{ 'color': 'red' }}>{error}</h6>
             </StyledForm>
             </div>
-        </Formik>
         </div>
         </div>
         </div>
         </StyledSignupContainer>
     )
+   }
+ }
 }
+
+export default Login;
+

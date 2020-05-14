@@ -1,10 +1,6 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
-import axios from "axios";
-import { Formik } from "formik";
-import Error from "../Helpers/Error";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { signup } from '../services/UsersAuth';
+import Spinner from './Spinner';
 import {
   StyledForm,
   StyledFormField,
@@ -14,57 +10,84 @@ import {
   StyledButton,
   StyledLink
 } from "../Styles/StyledForm";
-import { validationSchema } from "../Helpers/ValidationSchema";
-
 
 import SignupImage from "../Assets/hero.png";
 
-const initialSignupForm = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  };
-
-export function RegisterForm(props) {
-    let history = useHistory()
-  return (
-      <Formik
-      validationSchema={validationSchema}
-      initialValues={initialSignupForm}
-      onSubmit={(values, actions) => {
-        const newUser = {
-          firstname: values.firstName,
-          lastname: values.lastName,
-          email: values.email,
-          password: values.password,
-        };
-        
-        actions.setSubmitting(true);
-
-            axios
-            .post("https://lambda-youtube-music.herokuapp.com/api/v1/users/register", newUser)
-            .then((res) => {
-                console.log(res);
-                actions.resetForm();
-                actions.setSubmitting(false);
-                history.push("/playlist")
-            })
-            .catch(err => {
-                toast.error(err.response.statusText);
-                actions.setSubmitting(false);
-            });
-        }}
-    >
-        {({
-                values,
-                errors,
-                touched,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-                isSubmitting
-            }) => (
+class SignUp extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        loading: false,
+        error: false,
+      }
+    }
+  
+    handleChange = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value,
+      })
+    }
+  
+    handleSubmit = (e) => {
+      e.preventDefault();
+      this.setState({
+        loading: true,
+      })
+      const newUser = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
+      }
+  
+      signup(newUser)
+        .then(() => {
+          this.setState({
+            loading: false
+          })
+        })
+        .then(() => {
+          this.props.setLoggedIn(true);
+          this.props.history.push('/playlist');
+        })
+        .catch(err => {
+          this.setState({
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            loading: false,
+            error: true,
+          });
+          console.log('boo!')
+        })
+  
+    }
+  
+    render() {
+  
+      let error;
+      if (this.state.error) {
+        error = "Invalid Sign Up Details"
+      } else {
+        error = null;
+      }
+  
+      if (this.state.loading) {
+        return (
+          <div>
+            <StyledSignupContainer>
+                <Spinner />
+            </StyledSignupContainer>
+          </div>
+        )
+      } else {
+          return (
+              <div>
     <StyledSignupContainer>
       <div className="left">
         <h1>Create an Account</h1>
@@ -74,102 +97,62 @@ export function RegisterForm(props) {
       </div>
       <div className="right">
             <div className="AuthBox">
-              <StyledForm onSubmit={handleSubmit}>
+              <StyledForm >
                 <StyledFormField>
                   <StyledLabel>First Name</StyledLabel>
-                  <div data-testid="firstNameField" className="inputField">
                   <StyledInput
                     name="firstName"
                     type="text"
                     placeholder="John"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.firstName}
-                    className={
-                        touched.firstName && errors.firstName ? "has-error" : null
-                      } 
+                    onChange={this.handleChange}
+                    value={this.state.firstName}
                   />
-                  <Error touched={touched.firstName} message={errors.firstName} />
-                  </div>
                 </StyledFormField>
                 <StyledFormField>
                   <StyledLabel>Last Name</StyledLabel>
-                  <div data-testid="lastNameField" className="inputField">
                   <StyledInput
                     name="lastName"
                     type="text"
                     placeholder="Doe"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.lastName}
-                    className={
-                        touched.lastName && errors.lastName ? "has-error" : null
-                    }
+                    onChange={this.handleChange}
+                    value={this.state.lastName}
                   />
-                  <Error touched={touched.lastName} message={errors.lastName} />
-                  </div>
                 </StyledFormField>
                 <StyledFormField>
                   <StyledLabel>Email</StyledLabel>
-                  <div data-testid="emailField" className="inputField">
                   <StyledInput
                     name="email"
                     type="email"
                     placeholder="johndoe@example.com"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    className={touched.email && errors.email ? "has-error" : null}
+                    onChange={this.handleChange}
+                    value={this.state.email}
                   />
-                  <Error touched={touched.email} message={errors.email} />
-                  </div>
                 </StyledFormField>
                 <StyledFormField>
                   <StyledLabel>Password</StyledLabel>
-                  <div data-testid="passwordField" className="inputField">
                   <StyledInput
                     name="password"
                     type="password"
                     placeholder="Enter your password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                    className={
-                        touched.password && errors.password ? "has-error" : null
-                      }
+                    onChange={this.handleChange}
+                    value={this.state.password}
                   />
-                  <Error touched={touched.password} message={errors.password} />
-                  </div>
                 </StyledFormField>
                 <div className="SignLink">
                 <p>Got an Account? <StyledLink to="/login">Sign In</StyledLink></p>
                 </div>
-                <StyledButton className="abutton" type="submit" disabled={isSubmitting} data-testid="submitButton">
+                <StyledButton className="button" type="button" onClick={this.handleSubmit}>
                   Sign up
                 </StyledButton>
-                <ToastContainer
-                    position="top-center"
-                    autoclose={2000}
-                    hideProgressBar
-                    pauseOnVisibilityChange
-                    draggable
-                    pauseOnHover
-                    closeButton={false}
-                    style={{
-                    "font-size": "1.5rem",
-                    width: "400px",
-                    "text-align": "center"
-                    }}
-                />
+                <h6 style={{'color': 'red'}}>{error}</h6>
               </StyledForm>
             </div>
       </div>
     </StyledSignupContainer>
-    )}
-</Formik>
-  );
+    </div>
+    )
+}
+    }
 }
 
-export default RegisterForm;
-
-
+export default SignUp;
