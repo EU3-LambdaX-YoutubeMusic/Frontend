@@ -5,6 +5,7 @@ import Login from './Components/SignIn';
 import Playlist from './Components/Playlist';
 import Navigation from './Components/Navigation';
 import LandingPage from './Components/LandingPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);

@@ -12,7 +12,7 @@ export default function Navigation(props) {
   if(!props.loggedIn) {
   return (
     <div>
-      <Navbar bg="#6A1362" variant="#6A1362">
+      <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">YouTube Music</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
@@ -25,10 +25,11 @@ export default function Navigation(props) {
   } else {
     return (
       <div>
-        <Navbar bg="background" variant="dark">
+        <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="#home">YouTube Music</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/playlist">My Playlist</Nav.Link>
             <Nav.Link onClick={logout} href="/">Sign Out</Nav.Link>
           </Nav>
         </Navbar>
