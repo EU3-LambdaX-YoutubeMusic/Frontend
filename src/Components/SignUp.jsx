@@ -80,9 +80,7 @@ class SignUp extends React.Component {
       if (this.state.loading) {
         return (
           <div>
-            <StyledSignupContainer>
                 <Spinner />
-            </StyledSignupContainer>
           </div>
         )
       } else {

@@ -4,6 +4,7 @@ import Signup from './Components/SignUp';
 import Login from './Components/SignIn';
 import Playlist from './Components/Playlist';
 import Navigation from './Components/Navigation';
+import LandingPage from './Components/LandingPage';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -20,9 +21,10 @@ function App() {
     <div>
       <Navigation loggedIn={loggedIn} />
       <div>
-    <Route path="/login" render={(props) => <Login {...props} setLoggedIn={setLoggedIn} />} />
-    <Route path="/signup" render={(props) => <Signup {...props} setLoggedIn={setLoggedIn} />} />
-    <Route path="/playlist" component={Playlist} />
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/login" render={(props) => <Login {...props} setLoggedIn={setLoggedIn} />} />
+      <Route path="/signup" render={(props) => <Signup {...props} setLoggedIn={setLoggedIn} />} />
+      <Route path="/playlist" component={Playlist} />
     </div>
     </div>
   );

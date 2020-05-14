@@ -118,6 +118,13 @@ export const StyledButton = styled.button`
   color: #ffffff;
   line-height: 1.4;
   background-color: ${theme.button};
+  &:hover{
+      border: 1px solid #7318f2;
+      color: ${theme.headings};
+      background: ${theme.link};
+      cursor: pointer;
+      transition: 0.3s ease-out;
+    }
 `;
 
 export const StyledLink = styled(Link)`
