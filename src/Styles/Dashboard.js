@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const Main = styled.main`
     margin-top: 0;
-    width: 60%;
-    padding: 5px 5%;
+    width: 50%;
+    
+    padding: 5px 45px;
     height: 100vh;
     margin: 0 auto;
     border: 1px solid black;
@@ -23,7 +24,6 @@ export const Main = styled.main`
 
         width: 100%;
         display: flex;
-        padding: 45px;
 
         .playlist-form {
             width: 60%;
@@ -60,14 +60,13 @@ export const Main = styled.main`
 export const PlayListSection = styled.article`
 
     display: flex;
-    margin: 3% auto;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 6rem;
     width: 100%;
     height: 50vh;
 
     .youtube-window {
-        width: 45%;
-        margin-right: 1.2rem;
+        width: 47%;
         img {
             width:100%;
             height:100%;
@@ -76,7 +75,7 @@ export const PlayListSection = styled.article`
 
     .track-list {
         border: 1px solid black;
-        width: 45%;
+        width: 47%;
         text-align: left;
         background-color: rgb(239, 239, 239);
         li{
