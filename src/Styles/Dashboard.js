@@ -30,19 +30,21 @@ export const Main = styled.main`
             .playlist-input-container {
                 display: flex;
                 margin-bottom: 5px;
+
                 label {
                     font-size: 1.5rem;
                     width: 30%;
                     text-align: left;
                     margin-left: 5px;
                 }
+
                 input {
                     width: 60%;
                     background-color: rgb(239, 239, 239);
                 }
-
             }
         }
+
         .submit-container {
             width: 30%;
             button {
@@ -62,16 +64,16 @@ export const PlayListSection = styled.article`
     justify-content: center;
     width: 100%;
     height: 50vh;
+
     .youtube-window {
         width: 45%;
         margin-right: 1.2rem;
         img {
             width:100%;
             height:100%;
-        }
-
-        
+        }        
     }
+
     .track-list {
         border: 1px solid black;
         width: 45%;
@@ -81,7 +83,6 @@ export const PlayListSection = styled.article`
             list-style: none;
             font-size: 1.5rem;
         }
-
     }
 
     .buttons {
@@ -89,6 +90,4 @@ export const PlayListSection = styled.article`
         justify-content: space-around;
         width: 80%;
     }
-
-
-`
+`;

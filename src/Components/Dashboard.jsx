@@ -1,6 +1,5 @@
 import React from 'react'
-import { Main, PlayListSection } from '../Styles/Dashboard'
-// import { FontAwesomeIcon } from '@FontAwesome/FontAwesomeIcon'
+import { Main, PlayListSection } from '../Styles/Dashboard' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 import youtubeimg from '../Assets/youtube-banner.png';
