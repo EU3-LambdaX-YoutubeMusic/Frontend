@@ -15,16 +15,11 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
-<<<<<<< HEAD
-    "react-scripts": "3.4.1",
-    "styled-components": "^5.1.0"
-=======
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-toastify": "^6.0.4",
     "styled-components": "^5.1.0",
     "yup": "^0.28.5"
->>>>>>> dbcbc34753fd33f6cb1c49f8ceb7b0a0647fdfea
   },
   "scripts": {
     "start": "react-scripts start",
