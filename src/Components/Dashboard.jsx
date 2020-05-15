@@ -1,5 +1,5 @@
 import React from 'react'
-import { Main, PlayListSection } from '../Styles/Dashboard' 
+import { Main, PlayListSection, DashboardContainer } from '../Styles/Dashboard' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 import youtubeimg from '../Assets/youtube-banner.png';
@@ -7,6 +7,7 @@ import youtubeimg from '../Assets/youtube-banner.png';
 
 export default function Dashboard() {
     return (
+        <DashboardContainer>
         <Main>
             <h1 className="user-greeting">Welcome, Username!</h1>
             <article>
@@ -56,5 +57,6 @@ export default function Dashboard() {
 
             </PlayListSection>
         </Main>
+        </DashboardContainer>
     )
 }

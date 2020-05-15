@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 
+export const DashboardContainer = styled.div`
+    background-color: #e7f0f4;
+`
+
 export const Main = styled.main`
     margin-top: 0;
-    width: 50%;
-    
+    width: 50%;    
     padding: 5px 45px;
     height: 100vh;
     margin: 0 auto;
@@ -40,7 +43,7 @@ export const Main = styled.main`
 
                 input {
                     width: 60%;
-                    background-color: rgb(239, 239, 239);
+                    height: 40px;
                 }
             }
         }
