@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import Signup from './Components/SignUp';
+import Login from './Components/SignIn';
+import Playlist from './Components/Playlist';
+import Navigation from './Components/Navigation';
+import LandingPage from './Components/LandingPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (window.localStorage.getItem('user')) {
+      setLoggedIn(true);
+    }
+    else {
+      setLoggedIn(false);
+    }
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navigation loggedIn={loggedIn} />
+      <div>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/login" render={(props) => <Login {...props} setLoggedIn={setLoggedIn} />} />
+      <Route path="/signup" render={(props) => <Signup {...props} setLoggedIn={setLoggedIn} />} />
+      <Route path="/playlist" component={Playlist} />
+    </div>
     </div>
   );
 }
