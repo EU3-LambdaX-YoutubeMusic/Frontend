@@ -29,3 +29,7 @@ const initialState = {
     }
   ]
 };
+
+// create context
+export const GlobalContext = createContext(initialState);
+
