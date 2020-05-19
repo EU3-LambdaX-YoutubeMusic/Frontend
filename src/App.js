@@ -5,6 +5,7 @@ import Login from './Components/SignIn';
 import Playlist from './Components/Playlist';
 import Navigation from './Components/Navigation';
 import LandingPage from './Components/LandingPage';
+import Dashboard from './Components/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path="/login" render={(props) => <Login {...props} setLoggedIn={setLoggedIn} />} />
       <Route path="/signup" render={(props) => <Signup {...props} setLoggedIn={setLoggedIn} />} />
       <Route path="/playlist" component={Playlist} />
+      <Route path="/dashboard" component={Dashboard} />
     </div>
     </div>
   );
