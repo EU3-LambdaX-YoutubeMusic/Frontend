@@ -55,5 +55,11 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-  
+  return (
+    <GlobalContext.Provider
+      value={{ playlist: state.playlist, deletePlaylistItem, addPlaylistItem }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 };
