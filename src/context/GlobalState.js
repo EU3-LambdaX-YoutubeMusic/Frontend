@@ -46,9 +46,7 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function addPlaylistItem(playlistItem) {
-    console.log("Before transformation", playlistItem);
     const item = await getVideoData(playlistItem.url);
-    console.log("After Transformation", item);
     dispatch({
       type: ADD_PLAYLIST_ITEM,
       payload: item
