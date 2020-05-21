@@ -10,8 +10,8 @@ export default function Playlist() {
   const { addPlaylistItem } = useContext(GlobalContext);
   const [url, setUrl] = useState("");
 
-  console.log("Hello")
-  console.log("brenda")
+  console.log("Hello");
+  console.log("brenda");
 
   const videos = playlist.map(video => {
     const embedableVideo = video.url.replace("watch?v=", "embed/");
@@ -34,26 +34,26 @@ export default function Playlist() {
   const next = () => {
     const currentlyPlaying = videoSrc;
     const currentlyPlayingIndex = videos.indexOf(currentlyPlaying);
-    setVideoSrc(videos[currentlyPlayingIndex + 1]);
+    if (currentlyPlayingIndex !== videos.length - 1) {
+      setVideoSrc(videos[currentlyPlayingIndex + 1]);
+    }
   };
 
   const previous = () => {
     const currentlyPlaying = videoSrc;
     const currentlyPlayingIndex = videos.indexOf(currentlyPlaying);
-    setVideoSrc(videos[currentlyPlayingIndex - 1]);
+    if (currentlyPlayingIndex !== 0) {
+      setVideoSrc(videos[currentlyPlayingIndex - 1]);
+    }
   };
 
-  const onClick = (id) => {
-    // take in an id
-    const video = playlist.find(item => item.id === id)
-
-    console.log(video)
-
-
-
-    // use the id to find a video
-    // console.log the video
-  }
+  const onClick = id => {
+    const video = playlist.find(item => item.id === id);
+    const videoUrl = video.url;
+    const embedableVideo = videoUrl.replace("watch?v=", "embed/");
+    const selectedVideoIndex = videos.indexOf(embedableVideo);
+    setVideoSrc(videos[selectedVideoIndex]);
+  };
 
   return (
     <div className="dashboard">
@@ -86,7 +86,16 @@ export default function Playlist() {
         </div>
         <div className="playlists">
           {playlist.map(playlistItem => (
-            <PlaylistItem key={playlistItem.id} playlistItem={playlistItem} onClick={() => onClick(playlistItem.id)} />
+            <PlaylistItem
+              key={playlistItem.id}
+              playlistItem={playlistItem}
+              onClick={() => onClick(playlistItem.id)}
+              className={
+                `${playlistItem.url.replace("watch?v=", "embed/")}` === videoSrc
+                  ? "active"
+                  : ""
+              }
+            />
           ))}
         </div>
       </div>

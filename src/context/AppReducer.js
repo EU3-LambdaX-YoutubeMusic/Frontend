@@ -13,7 +13,7 @@ export default (state, action) => {
     case ADD_PLAYLIST_ITEM:
       return {
         ...state,
-        playlist: [action.payload, ...state.playlist]
+        playlist: [...state.playlist, action.payload]
       };
     default:
       return state;
