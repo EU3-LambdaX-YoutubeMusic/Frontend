@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const DashboardContainer = styled.div`
     background-color: #e7f0f4;
+    border: 1px solid red;
 `
 
 export const Main = styled.main`
@@ -11,7 +12,8 @@ export const Main = styled.main`
     height: 100vh;
     margin: 0 auto;
     border: 1px solid black;
-    background-color: white;//rgb(242, 245, 240);
+    background-color: #e7f0f4;
+    /* background-color: white;//rgb(242, 245, 240); */
 
     .user-greeting {
         display: block;
