@@ -83,6 +83,7 @@ export const PlayListSection = styled.article`
         width: 47%;
         text-align: left;
         background-color: rgb(239, 239, 239);
+        
         li{
             list-style: none;
             font-size: 1.5rem;
@@ -93,5 +94,6 @@ export const PlayListSection = styled.article`
         display: flex;
         justify-content: space-around;
         width: 80%;
+        
     }
 `;

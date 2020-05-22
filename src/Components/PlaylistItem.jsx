@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import "../Styles/Playlist.scss";
+import { Button } from "../Styles/Playlistitem"
 
 export default function PlaylistItem({ playlistItem, onClick, className }) {
   const { deletePlaylistItem } = useContext(GlobalContext);
@@ -9,13 +9,15 @@ export default function PlaylistItem({ playlistItem, onClick, className }) {
     <div>
       <li className={className}>
         <div>
-          <button onClick={() => deletePlaylistItem(playlistItem.id)}>
-            <i className="fas fa-minus-circle"></i>
-          </button>
+          <Button onClick={() => deletePlaylistItem(playlistItem.id)}>
+          
+          
           <div className="list-item" onClick={onClick}>
             <img src={playlistItem.imageThumbnail} alt={playlistItem.title} />
             <p>{playlistItem.title}</p>
           </div>
+          <i class="fas fa-trash-alt"></i>
+          </Button>
         </div>
       </li>
     </div>

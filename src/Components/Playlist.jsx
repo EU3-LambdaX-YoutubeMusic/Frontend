@@ -10,9 +10,6 @@ export default function Playlist() {
   const { addPlaylistItem } = useContext(GlobalContext);
   const [url, setUrl] = useState("");
 
-  console.log("Hello");
-  console.log("brenda");
-
   const videos = playlist.map(video => {
     const embedableVideo = video.url.replace("watch?v=", "embed/");
     return embedableVideo;
@@ -80,8 +77,9 @@ export default function Playlist() {
               type="text"
               value={url}
               onChange={event => setUrl(event.target.value)}
+              placeholder="Enter youtube url"
             />
-            <input type="submit" value="Add Item" />
+            <button type="submit" value="Add Item">Add Item</button>
           </form>
         </div>
         <div className="playlists">

@@ -3,10 +3,10 @@ import { Route } from "react-router-dom";
 import Signup from "./Components/SignUp";
 import Login from "./Components/SignIn";
 import Playlist from "./Components/Playlist";
-import Navigation from "./Components/Navigation";
+// import Navigation from "./Components/Navigation";
 import LandingPage from "./Components/LandingPage";
 import Dashboard from "./Components/Dashboard";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import { GlobalProvider } from "./context/GlobalState";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
   }, []);
   return (
     <div>
-      <Navigation loggedIn={loggedIn} />
+      {/* <Navigation loggedIn={loggedIn} /> */}
       <div>
         <Route exact path="/" component={LandingPage} />
         <Route

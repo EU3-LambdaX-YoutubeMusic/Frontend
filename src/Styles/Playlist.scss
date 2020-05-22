@@ -8,6 +8,7 @@
 
 .playlist-container {
   padding-left: 30px;
+  // background-color: #00FFFF;
 }
 
 li {
@@ -22,6 +23,69 @@ li {
   }
 }
 
+.form-container {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  form {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+
+    input {
+      width: 70%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 1.5rem; 
+    }
+    button {
+      border-radius: 10px;
+      margin: 10px;
+      width: 30%;
+      font-size: 1rem;
+      align-items: center;
+      padding: 10px 20px;
+      color: #ffffff;
+      line-height: 1.4;
+      background-color: #154951;
+      &:hover{
+          border: 1px solid #7318f2;
+          color: #0A0B2C;
+          background: #cc338b;
+          cursor: pointer;
+          transition: 0.3s ease-out;
+        }
+    }
+  }
+}
+
 .active {
-  border: 1px solid blue;
+  // border: 1px solid blue;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+
+}
+
+button {
+  border-radius: 10px;
+  margin: 5px;
+  font-size: 1rem;
+  align-items: center;
+  padding: 10px 20px;
+  color: #ffffff;
+  line-height: 1.4;
+  background-color: #154951;
+  &:hover{
+      border: 1px solid #7318f2;
+      color: #0A0B2C;
+      background: #cc338b;
+      cursor: pointer;
+      transition: 0.3s ease-out;
+    }
 }
